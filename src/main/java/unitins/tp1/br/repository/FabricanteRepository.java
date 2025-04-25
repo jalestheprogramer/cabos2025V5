@@ -15,7 +15,6 @@ public class FabricanteRepository implements PanacheRepository<Fabricante> {
         return find("SELECT e FROM Fabricante e WHERE e.cnpj = ?1 ", cnpj).firstResult();
     }
 
-    // mudar Cabos para Fabricante
     public Fabricante findByNome(String nome) {
         return find("SELECT e FROM Fabricante e WHERE e.nome like ?1 ", "%" + nome + "%").firstResult();
     }
