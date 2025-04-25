@@ -15,6 +15,10 @@ public class CabosRepository implements PanacheRepository<Cabos> {
     public Cabos findByNome(String nome){
         return find("SELECT m FROM Cabos m WHERE m.nome = ?1 ",nome).firstResult();
     }
+
+    public Cabos findById(long id){
+        return find("SELECT m FROM Cabos m WHERE m.id = ?1 ",id).firstResult();
+    }
     
      public List<Cabos> findByFabricante(Long idFabricante) {
         return find("SELECT m FROM Cabos m WHERE m.fabricante.id = ?1", idFabricante).list();

@@ -17,6 +17,10 @@ public class UsuarioFisicoRepository implements PanacheRepository<UsuarioFisico>
         return find("cpf = ?1", cpf).firstResult();
     }
 
+    public UsuarioFisico findById(long id) {
+        return find("SELECT e FROM UsuarioFisico e WHERE e.id = ?1 ", id).firstResult();
+    }
+
     public List<UsuarioFisico> findByUserAdm(Boolean userAdm) {
         return find("SELECT e FROM UsuarioFisico e WHERE e.userAdm like ?1 ", userAdm).list();
     }

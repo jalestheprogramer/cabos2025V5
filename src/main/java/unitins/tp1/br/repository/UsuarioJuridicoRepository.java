@@ -17,6 +17,10 @@ public class UsuarioJuridicoRepository implements PanacheRepository<UsuarioJurid
         return find("cnpj = ?1", cnpj).firstResult();
     }
 
+    public UsuarioJuridico findById(long id) {
+        return find("SELECT e FROM UsuarioJuridico e WHERE e.id = ?1 ", id).firstResult();
+    }
+
     public UsuarioJuridico findByNumeroParceria(int numeroParceria) {
         return find("SELECT e FROM UsuarioJuridico e WHERE e.numeroParceria like ?1 ", numeroParceria).firstResult();
     }
