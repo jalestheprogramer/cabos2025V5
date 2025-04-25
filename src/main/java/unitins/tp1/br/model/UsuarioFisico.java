@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class UsuarioFisico extends PessoaFisica  {
+    
     private Boolean userAdm;
 
     public Boolean getUserAdm() {

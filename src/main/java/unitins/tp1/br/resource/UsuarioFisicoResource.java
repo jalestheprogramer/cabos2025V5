@@ -13,12 +13,10 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
 import unitins.tp1.br.dto.UsuarioFisicoDTO;
-
 import unitins.tp1.br.service.UsuarioFisicoService;
 
-@Path("pessoafisica")
+@Path("usuariofisico")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
