@@ -21,6 +21,10 @@ public class Cabos extends DefaultEntity {
     @Column(nullable = false)
     private Tecnologia tecnologia;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Tamanho tamanho;
+
     public void setTecnologia(Tecnologia tecnologia) {
         this.tecnologia = tecnologia;
     }
@@ -44,4 +48,13 @@ public class Cabos extends DefaultEntity {
     public Fabricante getFabricante() {
         return fabricante;
     }
+
+    public Tamanho getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(Tamanho tamanho) {
+        this.tamanho = tamanho;
+    }
+
 }

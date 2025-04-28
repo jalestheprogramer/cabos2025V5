@@ -15,6 +15,10 @@ public record CabosDTO(
 
     @Min(value = 1, message = "O valor mínimo para a tecnologia é 1.")
     @Size(max = 4, min = 1, message = "O id informado e invalido.")
-    Integer idTecnologia) {
+    Integer idTecnologia,
+    
+    @Min(value = 1, message = "O valor mínimo para a tamanho é 1.")
+    @Size(max = 13, min = 1, message = "O id informado e invalido.")
+    Integer idTamanho) {
     
 }
