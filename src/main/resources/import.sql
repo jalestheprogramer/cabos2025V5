@@ -20,8 +20,8 @@ insert into fabricante (id, cadastroF) values (1, '202324');
 insert into fabricante (id, cadastroF) values (2, '202333');
 
 -- Inserindo cabos (verifique se os valores de tecnologia e tamanho correspondem aos enums)
-insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('FDGh', 1, 2, 4); -- CAT6, 40M
-insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('JCBi', 2, 4, 9); -- CAT8, 90M
-insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('OPAo', 1, 1, 11); -- CAT5, 130M
-insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('JACm', 1, 5, 1); -- CAT8, 10M
-insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('MMMm', 1, 4, 3); -- CAT8, 30M
+insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('FDGh', 1, 'CAT5', 'M10'); -- CAT6, 40M
+insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('JCBi', 2, 'CAT8', 'M90'); -- CAT8, 90M
+insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('OPAo', 1, 'CAT5', 'M120'); -- CAT5, 130M
+insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('JACm', 1, 'CAT7', 'M10'); -- CAT8, 10M
+insert into cabos (nome, id_fabricante, tecnologia, tamanho) values ('MMMm', 1, 'CAT8', 'M30'); -- CAT8, 30M

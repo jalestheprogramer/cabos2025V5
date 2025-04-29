@@ -9,6 +9,7 @@ import unitins.tp1.br.dto.CabosDTO;
 import unitins.tp1.br.dto.CabosResponseDTO;
 import unitins.tp1.br.model.Cabos;
 import unitins.tp1.br.model.Fabricante;
+import unitins.tp1.br.model.Tamanho;
 import unitins.tp1.br.model.Tecnologia;
 import unitins.tp1.br.repository.CabosRepository;
 import unitins.tp1.br.repository.FabricanteRepository;
@@ -19,23 +20,23 @@ public class CabosServiceimpl implements CabosService {
     @Inject
     CabosRepository cabosRepository;
 
-    @Inject 
+    @Inject
     FabricanteRepository fabricanteRepository;
 
     @Override
     @Transactional
     public CabosResponseDTO create(CabosDTO dto) {
-        
+
         Cabos novoCabos = new Cabos();
         novoCabos.setNome(dto.nome());
 
-      
         Fabricante fabricante = fabricanteRepository.findById(dto.idfabricante());
-        novoCabos.setTecnologia(Tecnologia.valueOf(dto.idTecnologia()));
-
         novoCabos.setFabricante(fabricante);
 
-        
+        novoCabos.setTecnologia(Tecnologia.valueOf(dto.idTecnologia()));
+
+        novoCabos.setTamanho(Tamanho.valueOf(dto.idTamanho()));
+
         cabosRepository.persist(novoCabos);
 
         return CabosResponseDTO.valueOf(novoCabos);
@@ -47,23 +48,36 @@ public class CabosServiceimpl implements CabosService {
     public void update(long id, CabosDTO dto) {
         Cabos edicaoCabos = cabosRepository.findById(id);
 
+        if (edicaoCabos == null) {
+            throw new IllegalArgumentException("Cabo com ID " + id + " não encontrado.");
+        }
+
         edicaoCabos.setNome(dto.nome());
-        
+
         Fabricante fabricante = fabricanteRepository.findById(dto.idfabricante());
+        
+        if (fabricante == null) {
+            throw new IllegalArgumentException("Fabricante com ID " + dto.idfabricante() + " não encontrado.");
+        }
+
         edicaoCabos.setFabricante(fabricante);
-     }
+
+        edicaoCabos.setTecnologia(Tecnologia.valueOf(dto.idTecnologia()));
+
+        edicaoCabos.setTamanho(Tamanho.valueOf(dto.idTamanho()));
+    }
 
     @Override
     @Transactional
     public void delete(long id) {
-        
+
         cabosRepository.deleteById(id);
 
     }
 
     @Override
     public CabosResponseDTO findById(long id) {
-        
+
         return CabosResponseDTO.valueOf(cabosRepository.findById(id));
     }
 
@@ -80,9 +94,9 @@ public class CabosServiceimpl implements CabosService {
 
     @Override
     public List<CabosResponseDTO> findAll() {
-        
+
         return cabosRepository.findAll().stream().map(e -> CabosResponseDTO.valueOf(e)).toList();
 
     }
-    
+
 }

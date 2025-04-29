@@ -9,6 +9,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -37,21 +38,28 @@ public class CabosResource {
 
     }
 
-    @GET
-    @Path("/id/{id}")
-    public Response buscarPorId(int id) {
-        return Response.ok().entity(service.findById(id)).build();
+// Exemplo para buscarPorId
+@GET
+@Path("/{id}")
+public Response buscarPorId(@PathParam("id") Long id) {
+    var dto = service.findById(id);
+    if (dto == null) {
+        return Response.status(Status.NOT_FOUND).build();
     }
+    return Response.ok(dto, MediaType.APPLICATION_JSON).build();
+}
+
+    
 
     @GET
     @Path("/nome/{nome}")
-    public Response buscarPorNome(String nome) {
+    public Response buscarPorNome(@PathParam("nome") String nome) {
         return Response.ok().entity(service.findByNome(nome)).build();
     }
 
     @PUT
     @Path("/{id}")
-    public Response alterar(long id, CabosDTO dto) {
+    public Response alterar(@PathParam("id") long id, CabosDTO dto) {
         service.update(id, dto);
         return Response.noContent().build();
     }

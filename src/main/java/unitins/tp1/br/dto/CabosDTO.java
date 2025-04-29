@@ -1,9 +1,9 @@
 package unitins.tp1.br.dto;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 public record CabosDTO(
 
@@ -14,11 +14,11 @@ public record CabosDTO(
     Long idfabricante,
 
     @Min(value = 1, message = "O valor mínimo para a tecnologia é 1.")
-    @Size(max = 4, min = 1, message = "O id informado e invalido.")
+    @Max(value = 4, message = "O valor máximo para a tecnologia é 4.")
     Integer idTecnologia,
     
     @Min(value = 1, message = "O valor mínimo para a tamanho é 1.")
-    @Size(max = 13, min = 1, message = "O id informado e invalido.")
+    @Max(value = 13, message = "O valor máximo para a tamanho é 13.")
     Integer idTamanho) {
     
 }

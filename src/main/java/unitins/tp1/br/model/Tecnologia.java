@@ -18,9 +18,10 @@ public enum Tecnologia {
         return ID;
     }
 
-    public String getTecnologia(String tecnologia) {
+    public String getTecnologia() {
         return TECNOLOGIA;
     }
+    
 
     public static Tecnologia valueOf(long id) {
         for (Tecnologia r : Tecnologia.values()) {
