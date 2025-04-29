@@ -38,16 +38,16 @@ public class CabosResource {
 
     }
 
-// Exemplo para buscarPorId
-@GET
-@Path("/{id}")
-public Response buscarPorId(@PathParam("id") Long id) {
-    var dto = service.findById(id);
-    if (dto == null) {
-        return Response.status(Status.NOT_FOUND).build();
+
+    @GET
+    @Path("/{id}")
+    public Response buscarPorId(@PathParam("id") Long id) {
+       var dto = service.findById(id);
+        if (dto == null) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        return Response.ok(dto, MediaType.APPLICATION_JSON).build();
     }
-    return Response.ok(dto, MediaType.APPLICATION_JSON).build();
-}
 
     
 
