@@ -10,6 +10,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -45,8 +46,12 @@ public class PessoaJuridicaResource {
 
     @GET
     @Path("/{id}")
-    public Response buscarPorSigla(Long id) { 
-        return Response.ok().entity(service.findById(id)).build();
+    public Response buscarPorId(@PathParam("id") Long id) {
+       var dto = service.findById(id);
+        if (dto == null) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        return Response.ok(dto, MediaType.APPLICATION_JSON).build();
     }
 
     @POST

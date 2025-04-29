@@ -9,7 +9,7 @@ import unitins.tp1.br.model.PessoaFisica;
 @ApplicationScoped
 public class PessoaFisicaRepository implements PanacheRepository<PessoaFisica> {
 
-    // adicionar o FindyById
+    
     public List<PessoaFisica> findByNome(String nome) {
         return find("nome like = ?1 ", "%" + nome + "%").list();
     }

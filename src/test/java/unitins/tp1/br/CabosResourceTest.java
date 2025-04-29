@@ -1,7 +1,6 @@
 package unitins.tp1.br;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +53,7 @@ public class CabosResourceTest {
 
     @Test
     void testBuscarPorId() {
-        // Criar cabo primeiro
+       
         CabosDTO cabos = new CabosDTO(
                 "Cabo HDMI",
                 1L,
