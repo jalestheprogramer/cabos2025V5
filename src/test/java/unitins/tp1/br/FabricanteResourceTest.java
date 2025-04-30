@@ -50,7 +50,7 @@ public class FabricanteResourceTest {
     }
 
     @Test
-    void testBuscarPorId() {
+    void testBuscarPorIdFabricante() {
        
         FabricanteDTO fabricante = new FabricanteDTO(
                 "2295555",
@@ -67,6 +67,28 @@ public class FabricanteResourceTest {
                 .body("id", equalTo(id.intValue()))
                 .body("cadastroF", is("2295555"))
                 .body("nome", is("baaanatel"))
+                .body("cnpj", is("44444444444444"));
+    }
+
+    @Test
+    void testBuscarPorNomeFabricante() {
+       
+        FabricanteDTO fabricante = new FabricanteDTO(
+                "2295555",
+                "baaanatel",
+                "44444444444444");
+
+        String nome = fabricanteService.create(fabricante).nome();
+        
+
+        given()
+                .when()
+                .get("/fabricantes/" + nome)
+                .then()
+                .statusCode(200)
+                .body("id", notNullValue())
+                .body("cadastroF", is("2295555"))
+                .body("nome", equalTo(nome))
                 .body("cnpj", is("44444444444444"));
     }
 
@@ -99,7 +121,7 @@ public class FabricanteResourceTest {
     }
 
     @Test
-    void testDeletarCabo() {
+    void testDeletarFabricante() {
         FabricanteDTO fabricante = new FabricanteDTO(
                 "229911",
                 "aaaanatel",

@@ -14,6 +14,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import unitins.tp1.br.dto.FabricanteDTO;
+import unitins.tp1.br.dto.FabricanteResponseDTO;
 import unitins.tp1.br.service.FabricanteService;
 
 @Path("fabricantes")
@@ -30,10 +31,13 @@ public class FabricanteResouce {
     }
 
     @GET
-    @Path("/nome/{nome}")
-    public Response buscarPorNomeF(String nome) {
-        return Response.ok().entity(service.findByNome(nome)).build();
+    @Path("/{nome}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarPorNome(@PathParam("nome") String nome) {
+        FabricanteResponseDTO dto = service.findByNome(nome);
+        return Response.ok(dto).build();
     }
+
 
     @POST
     public Response incluir(FabricanteDTO dto) {
