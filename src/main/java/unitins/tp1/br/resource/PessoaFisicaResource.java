@@ -1,6 +1,8 @@
 package unitins.tp1.br.resource;
 
 
+import java.util.List;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import unitins.tp1.br.dto.PessoaFisicaResponseDTO;
 import unitins.tp1.br.dto.PessoaFisicaDTO;
 import unitins.tp1.br.service.PessoaFisicaService;
 
@@ -33,14 +36,16 @@ public class PessoaFisicaResource {
     }
 
     @GET
-    @Path("/nome/{nome}")
-    public Response buscarPorNome(String nome) { 
-        return Response.ok().entity(service.findByNome(nome)).build();
+    @Path("/{nome}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarPorNome(@PathParam("nome") String nome) {
+        List<PessoaFisicaResponseDTO> dto = service.findByNome(nome);
+        return Response.ok(dto).build();
     }
 
     @GET
     @Path("/cpf/{cpf}")
-    public Response buscarPorSigla(String cpf) { 
+    public Response buscarPorCpf(String cpf) { 
         return Response.ok().entity(service.findByCpf(cpf)).build();
     }
 

@@ -10,7 +10,7 @@ import unitins.tp1.br.model.UsuarioFisico;
 public class UsuarioFisicoRepository implements PanacheRepository<UsuarioFisico> {
 
     public List<UsuarioFisico> findByNome(String nome) {
-        return find("nome like = ?1 ", "%" + nome + "%").list();
+        return find("nome like ?1 ", "%" + nome + "%").list();
     }
 
     public UsuarioFisico findByCpf(String cpf) {
