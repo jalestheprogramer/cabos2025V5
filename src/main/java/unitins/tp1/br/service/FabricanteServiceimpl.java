@@ -71,12 +71,6 @@ public class FabricanteServiceimpl implements FabricanteService {
     }
 
     @Override
-    public FabricanteResponseDTO findByCnpj(String cnpj) {
-        return FabricanteResponseDTO.valueOf(fabricanteRepository.findByCnpj(cnpj));
-    }
-
-
-    @Override
     @Transactional
     public List<FabricanteResponseDTO> findAll() {
         return fabricanteRepository.findAll().stream().map(FabricanteResponseDTO::valueOf).toList();

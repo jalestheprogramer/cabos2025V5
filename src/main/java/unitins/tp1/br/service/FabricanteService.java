@@ -13,7 +13,6 @@ public interface FabricanteService {
     FabricanteResponseDTO findById(long id);
     FabricanteResponseDTO findByNome(String nome);
     FabricanteResponseDTO findByCadastro(String cadastroF);
-    FabricanteResponseDTO findByCnpj(String cnpj);
     List<FabricanteResponseDTO> findAll();
 
 }
