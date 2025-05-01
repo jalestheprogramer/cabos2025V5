@@ -44,9 +44,11 @@ public class PessoaFisicaResource {
     }
 
     @GET
-    @Path("/cpf/{cpf}")
-    public Response buscarPorCpf(String cpf) { 
-        return Response.ok().entity(service.findByCpf(cpf)).build();
+    @Path("cpf/{cpf}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByCpf(@PathParam("cpf") String cpf) {
+        PessoaFisicaResponseDTO pessoaFisica = service.findByCpf(cpf);
+        return Response.ok(pessoaFisica).build();
     }
 
     @GET

@@ -1,6 +1,8 @@
 package unitins.tp1.br.resource;
 
 
+import java.util.List;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -16,6 +18,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import unitins.tp1.br.dto.PessoaJuridicaDTO;
+import unitins.tp1.br.dto.PessoaJuridicaResponseDTO;
 import unitins.tp1.br.service.PessoaJuridicaService;
 
 @Path("pessoajuridica")
@@ -33,15 +36,19 @@ public class PessoaJuridicaResource {
     }
 
     @GET
-    @Path("/nome/{nome}")
-    public Response buscarPorNome(String nome) { 
-        return Response.ok().entity(service.findByNome(nome)).build();
+    @Path("/{nome}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarPorNome(String nome) {
+        List<PessoaJuridicaResponseDTO> dto = service.findByNome(nome);
+        return Response.ok(dto).build();
     }
 
     @GET
-    @Path("/cnpj/{cnpj}")
-    public Response buscarPorCnpj(String cnpj) { 
-        return Response.ok().entity(service.findByCnpj(cnpj)).build();
+    @Path("cnpj/{cnpj}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByCnpj(@PathParam("cnpj") String cnpj) {
+        PessoaJuridicaResponseDTO pessoaJuridica = service.findByCnpj(cnpj);
+        return Response.ok(pessoaJuridica).build();
     }
 
     @GET

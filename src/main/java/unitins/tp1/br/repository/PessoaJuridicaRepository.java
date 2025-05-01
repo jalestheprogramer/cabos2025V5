@@ -10,14 +10,15 @@ import unitins.tp1.br.model.PessoaJuridica;
 public class PessoaJuridicaRepository implements PanacheRepository<PessoaJuridica> {
 
     public List<PessoaJuridica> findByNome(String nome) {
-        return find("nome like = ?1 ", "%" + nome + "%").list();
+        return find("nome LIKE ?1", "%" + nome + "%").list();
     }
+    
 
     public PessoaJuridica findById(long id) {
         return find("SELECT e FROM PessoaJuridica e WHERE e.id = ?1 ", id).firstResult();
     }
 
-    public PessoaJuridica findByCpf(String cnpj) {
-        return find("cpf = ?1", cnpj).firstResult();
+    public PessoaJuridica findByCnpj(String cnpj) {
+        return find("SELECT e FROM PessoaJuridica e WHERE e.cnpj = ?1 ", cnpj).firstResult();
     }
 }

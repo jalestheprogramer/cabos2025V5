@@ -20,6 +20,6 @@ public class PessoaFisicaRepository implements PanacheRepository<PessoaFisica> {
     }
 
     public PessoaFisica findByCpf(String cpf) {
-        return find("cpf = ?1", cpf).firstResult();
+        return find("SELECT e FROM PessoaFisica e WHERE e.cpf = ?1 ", cpf).firstResult();
     }
 }

@@ -52,7 +52,7 @@ public class PessoaJuridicaServiceimpl implements PessoaJuridicaService {
 
     @Override
     public PessoaJuridicaResponseDTO findByCnpj(String cnpj) {
-        return PessoaJuridicaResponseDTO.valueOf(pessoajuridicaRepository.findByCpf(cnpj));
+        return PessoaJuridicaResponseDTO.valueOf(pessoajuridicaRepository.findByCnpj(cnpj));
     }
 
     @Override
