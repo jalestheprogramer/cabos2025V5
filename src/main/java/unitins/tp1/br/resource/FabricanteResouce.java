@@ -38,16 +38,15 @@ public class FabricanteResouce {
         return Response.ok(dto).build();
     }
 
-
     @POST
     public Response incluir(FabricanteDTO dto) {
         return Response.status(Status.CREATED).entity(service.create(dto)).build();
     }
-    
+
     @GET
-    @Path("/{id}")
+    @Path("/id/{id}")
     public Response buscarPorId(@PathParam("id") Long id) {
-       var dto = service.findById(id);
+        var dto = service.findById(id);
         if (dto == null) {
             return Response.status(Status.NOT_FOUND).build();
         }

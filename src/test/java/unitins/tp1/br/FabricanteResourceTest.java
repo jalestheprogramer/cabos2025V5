@@ -61,7 +61,7 @@ public class FabricanteResourceTest {
 
         given()
                 .when()
-                .get("/fabricantes/" + id)
+                .get("/fabricantes/id/" + id)
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(id.intValue()))

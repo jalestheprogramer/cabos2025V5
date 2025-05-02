@@ -19,137 +19,134 @@ import static org.hamcrest.Matchers.greaterThan;
 
 @QuarkusTest
 public class PessoaFisicaResourceTest {
-        @Inject
-        PessoaFisicaService pessoaFisicaService;
+    @Inject
+    PessoaFisicaService pessoaFisicaService;
 
-        @Test
-        void testbuscarTodosPessoaFisicaService() {
-                given()
-                                .when()
-                                .get("pessoafisica")
-                                .then()
-                                .statusCode(200);
-        }
+    @Test
+    void testbuscarTodosPessoaFisicaService() {
+        given()
+                .when()
+                .get("pessoafisica")
+                .then()
+                .statusCode(200);
+    }
 
-        @Test
-        void testCriarPessoaFisica() {
-                PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
-                                "janio",
-                                "30254478395");
-
-                given()
-                                .contentType(ContentType.JSON)
-                                .body(pessoaFisica)
-                                .when().post("/pessoafisica")
-                                .then()
-                                .statusCode(201)
-                                .body("id", notNullValue())
-                                .body("nome", is("janio"))
-                                .body("cpf", is("30254478395"));
-        }
-
-        @Test
-        void testBuscarPorIdPessoaFisica() {
-
-                PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
-                                "janio",
-                                "30254478395");
-
-                Long id = pessoaFisicaService.create(pessoaFisica).id();
-
-                given()
-                                .when()
-                                .get("/pessoafisica/" + id)
-                                .then()
-                                .statusCode(200)
-                                .body("id", equalTo(id.intValue()))
-                                .body("nome", is("janio"))
-                                .body("cpf", is("30254478395"));
-        }
-
-        @Test
-        void testBuscarPorCpfPessoaFisica() {
-            PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
+    @Test
+    void testCriarPessoaFisica() {
+        PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
                 "janio",
-                 "30254478395");
-        
-            
-            given()
+                "30254478395");
+
+        given()
                 .contentType(ContentType.JSON)
                 .body(pessoaFisica)
-            .when()
+                .when().post("/pessoafisica")
+                .then()
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("nome", is("janio"))
+                .body("cpf", is("30254478395"));
+    }
+
+    @Test
+    void testBuscarPorIdPessoaFisica() {
+
+        PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
+                "janio",
+                "30254478395");
+
+        Long id = pessoaFisicaService.create(pessoaFisica).id();
+
+        given()
+                .when()
+                .get("/pessoafisica/id/" + id)
+                .then()
+                .statusCode(200)
+                .body("id", equalTo(id.intValue()))
+                .body("nome", is("janio"))
+                .body("cpf", is("30254478395"));
+    }
+
+    @Test
+    void testBuscarPorCpfPessoaFisica() {
+        PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
+                "janio",
+                "30254478395");
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(pessoaFisica)
+                .when()
                 .post("/pessoafisica")
-            .then()
-                .statusCode(201); 
-        
-            
-            given()
+                .then()
+                .statusCode(201);
+
+        given()
                 .when()
                 .get("/pessoafisica/cpf/30254478395")
-            .then()
+                .then()
                 .statusCode(200)
                 .body("id", notNullValue())
                 .body("nome", is("janio"))
                 .body("cpf", is("30254478395"));
-        }
-        
+    }
 
-        @Test
-        void testBuscarPorNomePessoaFisica() {
-                PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
-                                "janio",
-                                "30254478395");
+    @Test
+    void testBuscarPorNomePessoaFisica() {
+        PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
+                "janio",
+                "30254478395");
 
-                String nome = pessoaFisicaService.create(pessoaFisica).nome();
+        String nome = pessoaFisicaService.create(pessoaFisica).nome();
 
-                given()
-                                .when()
-                                .get("/pessoafisica/" + nome)
-                                .then()
-                                .statusCode(200)
-                                .body("size()", greaterThan(0))
-                                .body("[0].id", notNullValue())
-                                .body("[0].nome", equalTo(nome))
-                                .body("[0].cpf", is("30254478395"));
-        }
+        given()
+                .when()
+                .get("/pessoafisica/" + nome)
+                .then()
+                .statusCode(200)
+                .body("size()", greaterThan(0))
+                .body("[0].id", notNullValue())
+                .body("[0].nome", equalTo(nome))
+                .body("[0].cpf", is("30254478395"));
+    }
 
-        @Test
-        void testAtualizarPessoaFisica() {
+    @Test
+    void testAtualizarPessoaFisica() {
 
-                PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
-                                "janio",
-                                "30254478395");
+        PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
+                "janio",
+                "30254478395");
 
-                Long id = pessoaFisicaService.create(pessoaFisica).id();
+        Long id = pessoaFisicaService.create(pessoaFisica).id();
 
-                PessoaFisicaDTO pessoaFisicaAlterado = new PessoaFisicaDTO(
-                                "janio - Alterado",
-                                "30254478395");
+        PessoaFisicaDTO pessoaFisicaAlterado = new PessoaFisicaDTO(
+                "janio - Alterado",
+                "30254478395");
 
-                given()
-                                .contentType(ContentType.JSON)
-                                .body(pessoaFisicaAlterado)
-                                .when().put("/pessoafisica/" + id)
-                                .then()
-                                .statusCode(204);
+        given()
+                .contentType(ContentType.JSON)
+                .body(pessoaFisicaAlterado)
+                .when().put("/pessoafisica/" + id)
+                .then()
+                .statusCode(204);
 
-                PessoaFisicaResponseDTO response = pessoaFisicaService.findById(id);
-                assertThat(response.nome(), is("janio - Alterado"));
-                assertThat(response.cpf(), is("30254478395"));
-        }
+        PessoaFisicaResponseDTO response = pessoaFisicaService.findById(id);
+        assertThat(response.nome(), is("janio - Alterado"));
+        assertThat(response.cpf(), is("30254478395"));
+    }
 
-        @Test
-        void testDeletarPessoaFisica() {
-                PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
-                                "janio",
-                                "30254478395");
+    @Test
+    void testDeletarPessoaFisica() {
+        PessoaFisicaDTO pessoaFisica = new PessoaFisicaDTO(
+                "janio",
+                "30254478395");
 
-                Long id = pessoaFisicaService.create(pessoaFisica).id();
+        Long id = pessoaFisicaService.create(pessoaFisica).id();
 
-                given()
-                                .when()
-                                .delete("pessoafisica/" + id)
-                                .then()
-                                .statusCode(204);
-        }
+        given()
+                .when()
+                .delete("pessoafisica/" + id)
+                .then()
+                .statusCode(204);
+    }
 }

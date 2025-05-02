@@ -11,7 +11,7 @@ public record UsuarioJuridicoDTO(
     String nome,
 
     @NotNull(message = "Deve aver um cnpj.")
-    @Size(max = 11, min = 11, message = "cnpj invalido deve aver 14 caracteres")
+    @Size(max = 14, min = 14, message = "cnpj invalido deve aver 14 caracteres")
     String cnpj,
     
     @NotNull(message = "Deve-se indicar se o codgo de parceria.")

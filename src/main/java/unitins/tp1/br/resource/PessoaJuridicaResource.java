@@ -52,7 +52,7 @@ public class PessoaJuridicaResource {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/id/{id}")
     public Response buscarPorId(@PathParam("id") Long id) {
        var dto = service.findById(id);
         if (dto == null) {

@@ -35,7 +35,7 @@ public class PessoaJuridicaResourceTest {
     void testCriarPessoaJuridica() {
         PessoaJuridicaDTO pessoaJuridica = new PessoaJuridicaDTO(
                 "havan",
-                "88888888888888");
+                "64252123000105");
 
         given()
                 .contentType(ContentType.JSON)
@@ -45,7 +45,7 @@ public class PessoaJuridicaResourceTest {
                 .statusCode(201)
                 .body("id", notNullValue())
                 .body("nome", is("havan"))
-                .body("cnpj", is("88888888888888"));
+                .body("cnpj", is("64252123000105"));
     }
 
     @Test
@@ -53,25 +53,25 @@ public class PessoaJuridicaResourceTest {
 
         PessoaJuridicaDTO pessoaJuridica = new PessoaJuridicaDTO(
                 "havan",
-                "88888888888888");
+                "64252123000105");
 
         Long id = pessoaJuridicaService.create(pessoaJuridica).id();
 
         given()
                 .when()
-                .get("/pessoajuridica/" + id)
+                .get("/pessoajuridica/id/" + id)
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(id.intValue()))
                 .body("nome", is("havan"))
-                .body("cnpj", is("88888888888888"));
+                .body("cnpj", is("64252123000105"));
     }
 
     @Test
     void testBuscarPorCnpjPessoaJuridica() {
         PessoaJuridicaDTO pessoaJuridica = new PessoaJuridicaDTO(
                 "havan",
-                "88888888888888");
+                "64252123000105");
 
         given()
                 .contentType(ContentType.JSON)
@@ -83,12 +83,12 @@ public class PessoaJuridicaResourceTest {
 
         given()
                 .when()
-                .get("pessoajuridica/cnpj/88888888888888")
+                .get("pessoajuridica/cnpj/64252123000105")
                 .then()
                 .statusCode(200)
                 .body("id", notNullValue())
                 .body("nome", is("havan"))
-                .body("cnpj", is("88888888888888"));
+                .body("cnpj", is("64252123000105"));
     }
 
         @Test
@@ -115,13 +115,13 @@ public class PessoaJuridicaResourceTest {
 
         PessoaJuridicaDTO pessoaJuridica = new PessoaJuridicaDTO(
                 "havan",
-                "88888888888888");
+                "64252123000105");
 
         Long id = pessoaJuridicaService.create(pessoaJuridica).id();
 
         PessoaJuridicaDTO pessoaJuridicaAlterado = new PessoaJuridicaDTO(
                 "havan - Alterado",
-                "88888888888888");
+                "64252123000105");
 
         given()
                 .contentType(ContentType.JSON)
@@ -132,14 +132,14 @@ public class PessoaJuridicaResourceTest {
 
         PessoaJuridicaResponseDTO response = pessoaJuridicaService.findById(id);
         assertThat(response.nome(), is("havan - Alterado"));
-        assertThat(response.cnpj(), is("88888888888888"));
+        assertThat(response.cnpj(), is("64252123000105"));
     }
 
     @Test
     void testDeletarPessoaJuridica() {
         PessoaJuridicaDTO pessoaJuridica = new PessoaJuridicaDTO(
                 "havan",
-                "88888888888888");
+                "64252123000105");
 
         Long id = pessoaJuridicaService.create(pessoaJuridica).id();
 

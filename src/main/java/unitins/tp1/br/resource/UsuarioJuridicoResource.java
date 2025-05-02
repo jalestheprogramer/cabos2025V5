@@ -1,5 +1,7 @@
 package unitins.tp1.br.resource;
 
+import java.util.List;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import unitins.tp1.br.dto.UsuarioJuridicoDTO;
+import unitins.tp1.br.dto.UsuarioJuridicoResponseDTO;
 import unitins.tp1.br.service.UsuarioJuridicoService;
 
 @Path("usuariojuridico")
@@ -33,13 +36,18 @@ public class UsuarioJuridicoResource {
 
     @GET
     @Path("/nome/{nome}")
-    public Response buscarPorNome(String nome) {
-        return Response.ok().entity(service.findByNome(nome)).build();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarPorNome(@PathParam("nome") String nome) {
+        List<UsuarioJuridicoResponseDTO> dto = service.findByNome(nome);
+        if (dto == null || dto.isEmpty()) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        return Response.ok(dto).build();
     }
 
     @GET
     @Path("/cnpj/{cnpj}")
-    public Response buscarPorCpf(String cnpj) {
+    public Response buscarPorCpf(@PathParam("cnpj") String cnpj) {
         return Response.ok().entity(service.findByCnpj(cnpj)).build();
     }
 
@@ -50,7 +58,7 @@ public class UsuarioJuridicoResource {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/id/{id}")
     public Response buscarPorId(@PathParam("id") Long id) {
        var dto = service.findById(id);
         if (dto == null) {

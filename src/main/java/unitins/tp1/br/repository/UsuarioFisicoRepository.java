@@ -22,6 +22,6 @@ public class UsuarioFisicoRepository implements PanacheRepository<UsuarioFisico>
     }
 
     public List<UsuarioFisico> findByUserAdm(Boolean userAdm) {
-        return find("SELECT e FROM UsuarioFisico e WHERE e.userAdm like ?1 ", userAdm).list();
+        return find("SELECT e FROM UsuarioFisico e WHERE e.userAdm = ?1 ", userAdm).list();
     }
 }

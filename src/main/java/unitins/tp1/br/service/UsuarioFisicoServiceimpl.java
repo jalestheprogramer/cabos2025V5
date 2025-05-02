@@ -8,7 +8,6 @@ import jakarta.transaction.Transactional;
 import unitins.tp1.br.dto.UsuarioFisicoDTO;
 import unitins.tp1.br.dto.UsuarioFisicoResponseDTO;
 import unitins.tp1.br.model.UsuarioFisico;
-
 import unitins.tp1.br.repository.UsuarioFisicoRepository;
 
 @ApplicationScoped
@@ -63,7 +62,8 @@ public class UsuarioFisicoServiceimpl implements UsuarioFisicoService {
 
     @Override
     public List<UsuarioFisicoResponseDTO> findByUserAdm(Boolean userAdm) {
-        return usuarioFisicoRepository.findByUserAdm(userAdm).stream().map(e -> UsuarioFisicoResponseDTO.valueOf(e)).toList();
+        List<UsuarioFisico> usuarios = usuarioFisicoRepository.findByUserAdm(userAdm);
+        return usuarios.stream().map(UsuarioFisicoResponseDTO::valueOf).toList();
     }
 
     @Override

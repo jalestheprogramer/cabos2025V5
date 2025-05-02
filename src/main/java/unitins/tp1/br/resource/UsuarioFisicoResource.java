@@ -45,8 +45,12 @@ public class UsuarioFisicoResource {
 
     @GET
     @Path("/userAdm/{userAdm}")
-    public Response buscarPorUserAdm(Boolean userAdm) {
-        return Response.ok().entity(service.findByUserAdm(userAdm)).build();
+    public Response buscarPorUserAdm(@PathParam("userAdm") Boolean userAdm) {
+        var usuarios = service.findByUserAdm(userAdm);
+        if (usuarios == null || usuarios.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(usuarios).build();
     }
 
     @GET

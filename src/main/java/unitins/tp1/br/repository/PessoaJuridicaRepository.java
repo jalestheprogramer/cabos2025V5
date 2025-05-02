@@ -10,7 +10,7 @@ import unitins.tp1.br.model.PessoaJuridica;
 public class PessoaJuridicaRepository implements PanacheRepository<PessoaJuridica> {
 
     public List<PessoaJuridica> findByNome(String nome) {
-        return find("nome LIKE ?1", "%" + nome + "%").list();
+        return find("nome like ?1", "%" + nome + "%").list();
     }
     
 

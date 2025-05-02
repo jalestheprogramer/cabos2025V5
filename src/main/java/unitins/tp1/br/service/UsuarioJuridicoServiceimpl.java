@@ -53,12 +53,19 @@ public class UsuarioJuridicoServiceimpl implements UsuarioJuridicoService {
 
     @Override
     public UsuarioJuridicoResponseDTO findByCnpj(String cnpj) {
-        return UsuarioJuridicoResponseDTO.valueOf(usuarioJuridicoRepository.findByCnpj(cnpj));
+        UsuarioJuridico usuario = usuarioJuridicoRepository.findByCnpj(cnpj);
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuário Jurídico com CNPJ " + cnpj + " não encontrado.");
+        }
+        return UsuarioJuridicoResponseDTO.valueOf(usuario);
     }
 
     @Override
     public List<UsuarioJuridicoResponseDTO> findByNome(String nome) {
-        return usuarioJuridicoRepository.findByNome(nome).stream().map(pf -> UsuarioJuridicoResponseDTO.valueOf(pf)).toList();
+        return usuarioJuridicoRepository.findByNome(nome)
+                .stream()
+                .map(UsuarioJuridicoResponseDTO::valueOf)
+                .toList();
     }
 
     @Override
