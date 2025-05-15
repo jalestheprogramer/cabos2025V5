@@ -4,6 +4,7 @@ package unitins.tp1.br.model;
 import jakarta.persistence.Entity;
 
 
+
 @Entity
 public class UsuarioFisico extends PessoaFisica  {
     
